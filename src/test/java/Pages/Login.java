@@ -22,6 +22,7 @@ public class Login {
     By customerDropdown = By.id("userSelect");
     By loginButton = By.xpath("//button[contains(text(),'Login')]");
 
+
     // Constructor
     public Login(WebDriver driver) {
         this.driver = driver;
@@ -44,8 +45,9 @@ public class Login {
         select.selectByIndex(1);
         custDropDown.click();
         custDropDown.sendKeys(Keys.ENTER);
+        WebElement loginBtn = driver.findElement((loginButton));
+        loginBtn.click();
 
-      //  dropdown.findElement(By.xpath("//option[contains(text(),'" + customerName + "')]")).click();
     }
 
     public void zclickLogin() {

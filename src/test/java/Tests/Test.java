@@ -5,7 +5,10 @@ public class Test extends Base {
     void Test1() {
         login.clickCustomerLogin();
         login.selectCustomer();
-//        login.selectCustomer("Harry Potter");
-//        login.zclickLogin();
+        account.selectAccount();
+        account.depositMoney();
+        account.VerifySuccessfulDeposit();
+        account.customerLogout();
+
     }
 }
