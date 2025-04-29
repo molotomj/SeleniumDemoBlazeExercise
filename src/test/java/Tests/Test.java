@@ -6,11 +6,12 @@ public class Test extends Base {
         login.clickCustomerLogin();
         login.selectCustomer(1);
         account.selectAccount();
-        account.depositMoney();
+        account.depositMoney("1500");
         account.VerifySuccessfulDeposit();
         account.customerLogout();
 
     }
+
     @org.testng.annotations.Test
     void Test2() {
         login.clickCustomerLogin();
@@ -18,4 +19,13 @@ public class Test extends Base {
         account.depositToEachAccount();
         account.customerLogout();
     }
+    @org.testng.annotations.Test
+    void Test3() {
+        login.clickCustomerLogin();
+        login.selectCustomer(3);
+        account.selectAccount();
+        account.depositMoney("31459");
+        account.VerifySuccessfulDeposit();
+    }
+
 }
