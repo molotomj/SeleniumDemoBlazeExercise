@@ -48,7 +48,7 @@ public class Login {
       //  dropdown.findElement(By.xpath("//option[contains(text(),'" + customerName + "')]")).click();
     }
 
-    public void zclickLogin() {
+    public void clickLogin() {
         driver.findElement(loginButton).click();
     }
 }
