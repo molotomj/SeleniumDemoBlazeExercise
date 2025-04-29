@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
+import java.util.List;
 
 public class Account {
     WebDriver driver;
@@ -31,6 +32,8 @@ public class Account {
     WebElement transactionMessage_xpath;
     @FindBy(xpath = "/html/body/div[1]/div/div[1]/button[2]")
     WebElement logoutButton_xpath;
+    @FindBy(xpath = "/html/body/div[1]/div/div[1]/button[1]")
+    WebElement homeButton_xpath;
 
     public void selectAccount() {
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(accountSelect));
@@ -64,6 +67,38 @@ public class Account {
     public void customerLogout() {
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(logoutButton_xpath));
         logoutButton_xpath.click();
+        homeButton_xpath.click();
     }
 
+    public void depositToEachAccount() {
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(accountSelect));
+        Select select = new Select(accountSelect);
+
+        // Get all available accounts
+        List<WebElement> accounts = select.getOptions();
+
+        for (int i = 0; i < accounts.size(); i++) {
+            // Select each account by index
+            select.selectByIndex(i);
+            accountSelect.click();
+            accountSelect.sendKeys(Keys.ENTER);
+
+            // Perform deposit operation
+            depositButton.click();
+            new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(amountInput));
+            amountInput.clear();
+            amountInput.sendKeys("1500");
+            depositButton_xpath.click();
+
+            // Verify deposit success
+            //transactionButton.click();
+            new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(transactionMessage_xpath));
+            boolean isMessageDisplayed = transactionMessage_xpath.isDisplayed();
+            if (isMessageDisplayed) {
+                System.out.println("Deposit successful for account: " + accounts.get(i).getText());
+            } else {
+                System.out.println("Deposit failed for account: " + accounts.get(i).getText());
+            }
+        }
+    }
 }

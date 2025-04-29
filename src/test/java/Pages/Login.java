@@ -37,18 +37,19 @@ public class Login {
 
     }
 
-    public void selectCustomer() {
+    public void selectCustomer(int custIndex) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(customerDropdown));
         WebElement custDropDown = driver.findElement(customerDropdown);
         Select select = new Select(custDropDown);
-        select.selectByIndex(1);
+        select.selectByIndex(custIndex);
         custDropDown.click();
         custDropDown.sendKeys(Keys.ENTER);
         WebElement loginBtn = driver.findElement((loginButton));
         loginBtn.click();
 
     }
+
 
     public void zclickLogin() {
         driver.findElement(loginButton).click();
