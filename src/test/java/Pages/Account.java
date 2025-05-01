@@ -43,10 +43,10 @@ public class Account {
         accountSelect.sendKeys(Keys.ENTER);
     }
 
-    public void depositMoney() {
+    public void depositMoney(String depositAmount) {
         depositButton.click();
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(amountInput));
-        amountInput.sendKeys("1500");
+        amountInput.sendKeys(depositAmount);
         depositButton_xpath.click();
     }
 
@@ -62,7 +62,11 @@ public class Account {
             Assert.fail();
             assert false;
         }
+
+
     }
+
+
 
     public void customerLogout() {
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(logoutButton_xpath));
@@ -101,4 +105,27 @@ public class Account {
             }
         }
     }
+
+public void withdrawMoney(String withdrawAmount) {
+
+
+    // Withdraw money
+    withdrawButton.click();
+    new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(amountInput));
+    amountInput.clear();
+    amountInput.sendKeys(withdrawAmount);
+    depositButton_xpath.click(); // Assuming the same button is used for withdrawal
+
+    // Verify withdrawal success
+    new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(transactionMessage_xpath));
+    boolean isWithdrawMessageDisplayed = transactionMessage_xpath.isDisplayed();
+    if (isWithdrawMessageDisplayed) {
+        System.out.println("Withdrawal of " + withdrawAmount + " was successful.");
+    } else {
+        System.out.println("Withdrawal of " + withdrawAmount + " failed.");
+        Assert.fail();
+    }
+}
+
+
 }
