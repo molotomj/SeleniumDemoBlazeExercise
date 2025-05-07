@@ -1,6 +1,22 @@
 package Tests;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+
 public class Test extends Base {
+    @BeforeMethod
+    public void setUp() {
+        if (driver == null) {
+            initializeDriver(); // Ensure WebDriver is initialized
+        }
+    }
+    @AfterMethod
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit(); // Quit WebDriver after each test
+            driver = null; // Reset driver to avoid reuse of invalid session
+        }
+    }
     @org.testng.annotations.Test
     void Test1() {
         login.clickCustomerLogin();
@@ -26,6 +42,7 @@ public class Test extends Base {
         account.selectAccount();
         account.depositMoney("31459");
         account.VerifySuccessfulDeposit();
+
     }
 
 }

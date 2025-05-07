@@ -51,7 +51,7 @@ public class Login {
     }
 
 
-    public void zclickLogin() {
+    public void clickLogin() {
         driver.findElement(loginButton).click();
     }
 }

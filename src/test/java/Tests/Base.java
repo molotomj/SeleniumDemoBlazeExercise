@@ -7,21 +7,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 public class Base {
-    BrowserFactory browserFactory = new BrowserFactory();
-    final WebDriver driver = browserFactory.startBrowser("chrome", "http://www.way2automation.com/angularjs-protractor/banking/#/login");
-    Login login = PageFactory.initElements(driver, Login.class);
-    Account account = PageFactory.initElements(driver, Account.class);
-    //HomePage homePage = PageFactory.initElements(driver, HomePage.class);
 
-    // TakesScreenshots takesScreenshots = new TakesScreenshots();
+    BrowserFactory browserFactory;
+    WebDriver driver;
+    Login login;
+    Account account;
 
-    // ReadFromExcel readFromExcel;
-
-//    {
-//        try {
-//            readFromExcel = new ReadFromExcel();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+    public void initializeDriver() {
+        browserFactory = new BrowserFactory();
+        driver = browserFactory.startBrowser("chrome", "http://www.way2automation.com/angularjs-protractor/banking/#/login");
+        login = PageFactory.initElements(driver, Login.class);
+        account = PageFactory.initElements(driver, Account.class);
+    }
 }

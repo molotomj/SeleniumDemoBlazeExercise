@@ -52,7 +52,7 @@ public class Account {
 
     public void VerifySuccessfulDeposit() {
         transactionButton.click();
-        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(transactionMessage_xpath));
+        new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.visibilityOf(transactionMessage_xpath));
         boolean isMessageDisplayed = transactionMessage_xpath.isDisplayed();
         if (isMessageDisplayed) {
             System.out.println("Success is displayed.");
@@ -65,8 +65,6 @@ public class Account {
 
 
     }
-
-
 
     public void customerLogout() {
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(logoutButton_xpath));
